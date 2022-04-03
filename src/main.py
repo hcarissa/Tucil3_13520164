@@ -6,7 +6,7 @@ import heapq
 
 # node : nodeke, parent, matrix, cost, movementlist
 # awal program
-print("                                            Selamat datang di")
+print("                                                Welcome to :")
 print()
 print(" ██╗███████╗      ██████╗ ██╗   ██╗███████╗███████╗██╗     ███████╗    ███████╗ ██████╗ ██╗    ██╗   ██╗███████╗██████╗ ")
 print("███║██╔════╝      ██╔══██╗██║   ██║╚══███╔╝╚══███╔╝██║     ██╔════╝    ██╔════╝██╔═══██╗██║    ██║   ██║██╔════╝██╔══██╗")
@@ -15,19 +15,19 @@ print(" ██║╚════██║╚════╝██╔═══╝
 print(" ██║███████║      ██║     ╚██████╔╝███████╗███████╗███████╗███████╗    ███████║╚██████╔╝███████╗╚████╔╝ ███████╗██║  ██║")
 print(" ╚═╝╚══════╝      ╚═╝      ╚═════╝ ╚══════╝╚══════╝╚══════╝╚══════╝    ╚══════╝ ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝╚═╝  ╚═╝")
 print("                                                                                                                        ")
-print("                                         Pilih cara input matrix : ")
+print("                                         Choose input matrix methods : ")
 print("                                              1. Input File")
 print("                                              2. Input Manual")
 print("                                              3. Randomize Matrix")
 print()
-methods = int(input("Ketik angka metode yang dipilih : "))
+methods = int(input("Enter the number of the chosen methods : "))
 # ngecek input
 while(methods != 1 and methods !=2 and methods!=3):
-    print("Masukkan salah, silakan ulangi!")
-    methods = int(input("Ketik angka metode yang dipilih : "))
+    print("Invalid input, try again")
+    methods = int(input("Enter the number of the chosen methods : "))
 # input untuk yang file
 if(methods == 1):
-    namaFile = str(input("Masukkan nama file yang berada di folder test\ncontoh 'matrix.txt' (tanpa tanda kutip) : "))
+    namaFile = str(input("Enter file name in folder test\nex. 'matrix.txt' (without the apostrophe) : "))
     with open("./test/" + namaFile) as f:
         lines = f.readlines()
     matrix = [[int(x) for x in line.split()]for line in lines]
@@ -37,21 +37,22 @@ if(methods == 1):
 elif(methods == 2):
     root = inputOwnMatrix()
 else:
+    print("Generating random matrix...")
     matrix = generateRandomMatrix()
     cost = findcost(matrix, 0)
     root = Node(1, [], matrix, cost)
-start_time = time.time()
 #solving
 allNode = []
 counterNode = 1
 print()
-print("15-Puzzle yang akan diselesaikan :")
+print("∷∷∷∷∷∷ Initial Puzzle State ∷∷∷∷∷∷")
 printMatrix(root)
-print("Berikut nilai fungsi Kurang :")
+print("\n∷∷∷∷∷∷∷ Values of \"Kurang\" ∷∷∷∷∷∷∷")
+start_time = time.time()
 if(canBeSolved(root.matrix)):
     print()
-    print("Persoalan dapat diselesaikan!")
-    print("Mencari solusi...")
+    print("Puzzle is solvable! \n")
+    print("Finding solution...\n")
     time.sleep(0.5)
     activeSet = []
     heapq.heappush(activeSet, (root.cost, root))
@@ -61,15 +62,14 @@ if(canBeSolved(root.matrix)):
         # get the node only
         checking = check[1]
         if(isFinalState(checking)):
-            print("Berikut langkah menuju solusi :")
+            print("The solution is found!")
             counter = 0
             # print semua solusi
             for nodes in (checking.parent):
-                print("=====================")
-                print("Langkah ke-"+str(counter))
+                print("∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷")
+                print("Step "+str(counter))
                 printMatrix(allNode[nodes-1])
-                print("Cost simpul : ", allNode[nodes-1].cost)
-                print("=====================")
+                print("∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷")
                 counter+=1
             break
         else:
@@ -86,9 +86,11 @@ if(canBeSolved(root.matrix)):
                     #masukkin simpul baru ke queue
                     heapq.heappush(activeSet, (newNode.cost, newNode))
                     del newNode
-    print("Jumlah simpul yang dibangkitkan\n(termasuk simpul akar) : ", counterNode)
+    print("∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷")
+    print("Sum of Nodes\n(including the root node) : ", counterNode)
 else:
-    print("Mohon maaf! Persoalan tidak dapat diselesaikan!")
-print("Waktu eksekusi : %s detik" % (time.time() - start_time))
-input("Tekan tombol apa saja untuk keluar...")
-
+    print("Puzzle is not solvable!")
+    print("∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷")
+print("Execution Time : %.10s Seconds" % (time.time() - start_time))
+print("∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷∷")
+input("Press any key to exit...")

@@ -9,17 +9,19 @@ class Node(NamedTuple):
     matrix: list[list]
     cost: int
 
+# input matrix dari user
 def inputOwnMatrix():
-    print("Masukkan matrix dengan menggunakan spasi untuk tiap elemen\ndalam sebuah baris dan enter jika akan menuju ke baris selanjutnya\nMatrix harus berukuran 4 x 4")
+    print("Input every element of matrix separated by space\nfor each row and press enter for the next row\nMatrix have to be 4 x 4")
     newMatrix = []
     for i in range(4):
-        line = input("Masukkan baris ke-"+str(i+1)+": ")
+        line = input("Input Row "+str(i+1)+": ")
         newRow = [int(x) for x in line.split()]
         newMatrix.append(newRow)
     cost = findcost(newMatrix, 0)
     root = Node(1, [], newMatrix, cost)
     return root
 
+# print matrix
 def printMatrix(Node):
     for i in range(4):
         print("+----+----+----+----+")
@@ -36,7 +38,7 @@ def printMatrix(Node):
         print()
     print("+----+----+----+----+")
 
-
+# menmbangunkan node baru setelah tile kosong di geser
 def moveNode(rootNode, movement, nodeKe):
     # movement
     # 1 - atas
@@ -126,6 +128,7 @@ def moveNode(rootNode, movement, nodeKe):
         print("Invalid Movement Input")
     return newNode
     
+# mengecek apakah matrix sudah di goal state 
 def isFinalState(finalNode):
     for i in range (4) :
         for j in range(4) :
@@ -133,6 +136,7 @@ def isFinalState(finalNode):
                 return False
     return True
 
+# mencari cost dari matrix
 def findcost(matrix, jarak):
     cost = jarak
     for i in range(4):
@@ -141,6 +145,7 @@ def findcost(matrix, jarak):
                 cost+=1
     return cost
 
+# mengecek apakah tile dapat digerakkan sesuai dengan movement
 def isPossible(matrix, movement):
     for i in range(4):
         for j in range(4):
@@ -156,6 +161,7 @@ def isPossible(matrix, movement):
                 elif(movement < 5 and movement > 0):
                     return True
 
+# mengecek apakah matrix setelah dipindahkan tidak akan sama dengan state sebelumnya
 def isGaBalik(node, allNode):
     if(node.nodeKe == 1):
         return True
