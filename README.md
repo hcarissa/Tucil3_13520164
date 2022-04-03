@@ -1,4 +1,4 @@
-# Tucil3_stima_13520164
+# Tucil3_13520164
 
 >_This program is created to fulfil one of the assignment in the course `IF2211 Algorithm Strategies`_<br/>
 >
@@ -7,7 +7,7 @@
 * [Description](#Description)
 * [Requirements](#Requirements)
 * [Running the Program](#Running-the-Program)
-* [Authors](#Authors)
+* [Author](#Author)
 
 ## Description
 _This program is a 15-Puzle solver which is implemented in Python using the Branch and Bound algorithm_

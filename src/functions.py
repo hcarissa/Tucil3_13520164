@@ -41,11 +41,3 @@ def canBeSolved(matrix):
     if(kurangi%2 == 0):
         return True
     return False
-
-# Generate a random 4x4 matrix
-def generateRandomMatrix():
-    matrix = np.arange(1, 17)
-    np.random.shuffle(matrix)
-
-    matrix = np.reshape(matrix, (4,4))
-    return matrix.tolist()

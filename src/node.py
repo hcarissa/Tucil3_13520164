@@ -21,6 +21,14 @@ def inputOwnMatrix():
     root = Node(1, [], newMatrix, cost)
     return root
 
+# Generate a random 4x4 matrix
+def generateRandomMatrix():
+    matrix = np.arange(1, 17)
+    np.random.shuffle(matrix)
+
+    matrix = np.reshape(matrix, (4,4))
+    return matrix.tolist()
+
 # print matrix
 def printMatrix(Node):
     for i in range(4):

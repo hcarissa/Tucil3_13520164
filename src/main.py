@@ -28,7 +28,7 @@ while(methods != 1 and methods !=2 and methods!=3):
 # input untuk yang file
 if(methods == 1):
     namaFile = str(input("Enter file name in folder test\nex. 'matrix.txt' (without the apostrophe) : "))
-    with open("./test/" + namaFile) as f:
+    with open("../test/" + namaFile) as f:
         lines = f.readlines()
     matrix = [[int(x) for x in line.split()]for line in lines]
     cost = findcost(matrix, 0)
